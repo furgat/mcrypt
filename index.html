@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>mCrypt</title>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.css"/> 
+        
+        <!-- Angular -->
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
+        <script src="bower_components/ngclipboard/dist/ngclipboard.min.js"></script>
+        
+        <!-- Furgat -->
+        <link href="css/main.css" rel="stylesheet">
+        <script src="js/mcrypt.js"></script>
+        <script src="js/tomes/rot13-tome.js"></script>
+        <script src="js/crypt-keeper.js"></script>
+        <script src="js/mcrypt-controller.js"></script>
+        
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    
+    <body ng-app="mCrypt">
+        <div ng-controller="CryptCtrl" class="container">
+            <div class="row">
+                <h1>:: mCrypt ::</h1>
+                <div class="panel panel-info col-sm-12">
+                    <div class="panel-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="ttcInput">Text to Encrypt: <span class="badge">{{userInput.toCrypt.length}}</span></label>
+                                <textarea 
+                                    id="ttcInput" ng-model="userInput.toCrypt" class="form-control"
+                                    ng-trim="false"
+                                ></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="tcmInput">Method of Encryption:</label>
+                                <select id="tcmInput" ng-model="userInput.kind" class="form-control">
+                                    <option ng-repeat="option in cryptKindOptions">{{option}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" ng-click="submitForm()" class="btn btn-primary col-sm-3 col-xs-6"><span class="glyphicon glyphicon-filter"></span>&nbsp;ENCRYPT</button>
+                                <div class="badge badge-note" ng-show="encryptMessage!=''">{{encryptMessage}}</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel panel-success col-sm-12">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="resultText">Result:</label>
+                            <textarea id="resultText" class="form-control" ng-model="result"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button ngclipboard data-clipboard-text="{{result}}" ngclipboard-success="copySuccess()" ngclipboard-error="copyFailed()" type="button" class="btn btn-primary col-sm-3 col-xs-6"><span class="glyphicon glyphicon-copy"></span>&nbsp;COPY TO CLIPBOARD</button>
+                            <div class="badge badge-note" ng-show="copiedMessage!=''">{{copiedMessage}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    
+</html>
