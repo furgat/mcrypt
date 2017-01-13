@@ -8,6 +8,7 @@ angular.module('mCrypt').controller('CryptCtrl', ['$scope', '$timeout', 'CryptKe
     $scope.result = '';
     $scope.copiedMessage = '';
     $scope.encryptMessage = '';
+    $scope.userTheme = 'dark';
     
     $scope.submitForm = function() {
         $scope.result = CryptKeeper.encrypt($scope.userInput.toCrypt, $scope.userInput.kind);
@@ -39,5 +40,9 @@ angular.module('mCrypt').controller('CryptCtrl', ['$scope', '$timeout', 'CryptKe
         $timeout(duration).then(function() {
             $scope.encryptMessage = ''; 
         });
+    }
+    
+    $scope.toggleTheme = function() {
+        $scope.userTheme = ($scope.userTheme == 'light' ? 'dark' : 'light');
     }
 }]);
