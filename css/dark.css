@@ -1,0 +1,6 @@
+.dark.wrapper { background-color: #666; min-height: 100%; height: 100%; }
+.dark h1, .dark label { color: white; }
+.dark .panel { background-color: #444; }
+.dark .panel-info { border-color: cadetblue; }
+.dark .panel-success { border-color: darkseagreen; }
+.dark input[type="text"], .dark textarea, .dark select { background-color: lightgray; color: #222; }
