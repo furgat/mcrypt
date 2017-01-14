@@ -10,13 +10,23 @@ angular.module('mCrypt').controller('CryptCtrl', ['$scope', '$timeout', 'CryptKe
     $scope.encryptMessage = '';
     $scope.userTheme = 'dark';
     
-    $scope.submitForm = function() {
+    $scope.submitEncrypt = function() {
         $scope.result = CryptKeeper.encrypt($scope.userInput.toCrypt, $scope.userInput.kind);
         if ( $scope.result != 'Method Does Not Exist') {
-            $scope.cryptMessage('ENCRYPTED!', 3000);
+            $scope.cryptMessage('encrypted', 3000);
         } else {
             $scope.result = '';
-            $scope.cryptMessage('Failed,,, :C', 3000);
+            $scope.cryptMessage('Failed,,:C', 3000);
+        }
+    }
+    
+    $scope.submitDecrypt = function() {
+        $scope.result = CryptKeeper.decrypt($scope.userInput.toCrypt, $scope.userInput.kind);
+        if ( $scope.result != 'Method Does Not Exist') {
+            $scope.cryptMessage('decrypted', 3000);
+        } else {
+            $scope.result = '';
+            $scope.cryptMessage('Failed,,:C', 3000);
         }
     }
     
@@ -25,7 +35,7 @@ angular.module('mCrypt').controller('CryptCtrl', ['$scope', '$timeout', 'CryptKe
     }
     
     $scope.copyFailed = function() {
-        $scope.copyMessage('Failed,,, :C', 3000);
+        $scope.copyMessage('Failed,,:C', 3000);
     }
     
     $scope.copyMessage = function(msg, duration) {
