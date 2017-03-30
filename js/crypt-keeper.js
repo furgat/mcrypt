@@ -1,14 +1,15 @@
-angular.module('mCrypt').service('CryptKeeper', ['Rot13', function(Rot13) {
+angular.module('mCrypt').service('CryptKeeper', ['Rot13', 'Zipper', function(Rot13, Zipper) {
     var getMethod = function(method, options) {
         for (var key in options) {
-            if (key == method) 
+            if (key == method)
                 return key;
         }
         return 'Method Does Not Exist'
     }
     var CryptKeeper = {
         options: {
-            Rot13: Rot13
+            Rot13: Rot13,
+            Zipper: Zipper
         },
         getOptions: function() {
             var result = [];
@@ -24,6 +25,6 @@ angular.module('mCrypt').service('CryptKeeper', ['Rot13', function(Rot13) {
             return this.options[getMethod(method, this.options)].decrypt(text);
         }
     };
-    
+
     return CryptKeeper;
 }]);
